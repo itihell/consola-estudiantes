@@ -5,15 +5,22 @@ export default class Model {
     return this.#table;
   }
   async save(payload) {
+    let datos = await this.load();
+    datos.push(payload);
+
     await fs.writeFile(
       `db/${this.getTable()}.json`,
-      JSON.stringify(payload, null, 2),
+      JSON.stringify(datos, null, 2),
     );
     return payload;
   }
 
   async load() {
-    const data = await fs.readFile(`${this.getTable()}.json`, "utf-8");
-    return JSON.parse(data);
+    try {
+      const data = await fs.readFile(`db/${this.getTable()}.json`, "utf-8");
+      return JSON.parse(data);
+    } catch (error) {
+      return [];
+    }
   }
 }
