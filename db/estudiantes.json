@@ -1,0 +1,12 @@
+[
+  {
+    "table": "estudiantes",
+    "id": 1780093622930,
+    "nombre": "Juana Perez",
+    "edad": 22,
+    "sexo": "Femenino",
+    "carrera": "Administracion de Empresas"
+  },
+  null,
+  null
+]
