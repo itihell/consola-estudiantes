@@ -6,7 +6,7 @@ export default class Model {
   }
   async save(payload) {
     await fs.writeFile(
-      `${this.getTable()}.json`,
+      `db/${this.getTable()}.json`,
       JSON.stringify(payload, null, 2),
     );
     return payload;
