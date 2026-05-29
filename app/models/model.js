@@ -1,8 +1,8 @@
 import fs from "fs/promises";
 export default class Model {
-  #table = "models";
+  table = "models";
   getTable() {
-    return this.#table;
+    return this.table;
   }
   async save(payload) {
     let datos = await this.load();

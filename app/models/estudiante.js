@@ -1,6 +1,6 @@
-import Persona from "./persona";
+import Persona from "./persona.js";
 export default class Estudiante extends Persona {
-  #table = "estudiantes";
+  table = "estudiantes";
   constructor(nombre, edad, sexo, carrera) {
     super(nombre, edad, sexo, carrera);
   }
