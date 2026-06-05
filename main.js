@@ -22,29 +22,24 @@ async function init() {
   return setup.opcion;
 }
 
-const opcion = await init();
-if (opcion === "1") {
-  // Lógica para agregar carrera
-  const carrera = await new Carrera("Licenciatura en Informatica");
-  const payloar = await carrera.save();
-  const datos = await carrera.load();
-  console.table(datos);
-} else if (opcion === "2") {
-  // Lógica para agregar estudiante
-  const estudiante = await new Estudiante(
-    "Francelis Miranda",
-    24,
-    "Licenciatura en Informatica",
-  );
-  const payload = await estudiante.save();
-  const datos = await estudiante.load();
-  console.table(datos);
-} else if (opcion === "3") {
-  // Lógica para salir
-} else {
-  console.log(
-    chalk.bgRed.white(
-      "Opción no válida. Por favor, selecciona una opción válida.",
-    ),
-  );
+function MainMenu(opcion) {
+  if (opcion === "1") {
+    // Carreras
+  } else if (opcion === "2") {
+    // Estudiantes
+  } else if (opcion === "3") {
+    // Lógica para salir
+  } else {
+    console.log(
+      chalk.bgRed.white(
+        "Opción no válida. Por favor, selecciona una opción válida.",
+      ),
+    );
+  }
 }
+
+const opcion = await init();
+
+{
+  MainMenu(opcion);
+}while(opcion !== "3");
