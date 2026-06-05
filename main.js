@@ -1,20 +1,28 @@
-import Carrera from "./app/models/carrera.js";
-import Estudiante from "./app/models/estudiante.js";
-
 import inquirer from "inquirer";
 import chalk from "chalk";
-// Carreras
-// Estudiantes
+
+import carreraController from "./app/controllers/carreraController.js";
 
 async function init() {
   const setup = await inquirer.prompt([
     {
-      type: "input",
+      type: "select",
       name: "opcion",
-      message: `¿Qué deseas hacer? 
-      1: Agregar carrera,
-      2: Agregar estudiante, 
-      3: Salir`,
+      message: `¿Qué deseas hacer?`,
+      choices: [
+        {
+          name: "Carreras",
+          value: "1",
+        },
+        {
+          name: "Estudiantes",
+          value: "2",
+        },
+        {
+          name: "Salir",
+          value: "3",
+        },
+      ],
     },
   ]);
 
@@ -22,9 +30,10 @@ async function init() {
   return setup.opcion;
 }
 
-function MainMenu(opcion) {
+async function MainMenu(opcion) {
   if (opcion === "1") {
-    // Carreras
+    const carrera = new carreraController(opcion);
+    await carrera.init();
   } else if (opcion === "2") {
     // Estudiantes
   } else if (opcion === "3") {
@@ -42,4 +51,7 @@ const opcion = await init();
 
 {
   MainMenu(opcion);
-}while(opcion !== "3");
+}
+while (opcion !== "3");
+
+
