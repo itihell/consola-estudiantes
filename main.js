@@ -47,11 +47,11 @@ async function MainMenu(opcion) {
   }
 }
 
+//(async function () {
 const opcion = await init();
-
 {
-  MainMenu(opcion);
+  await MainMenu(opcion);
+  
 }
 while (opcion !== "3");
-
-
+//})();

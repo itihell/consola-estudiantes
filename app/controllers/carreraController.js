@@ -6,7 +6,7 @@ export default class CarreraController {
   opciones = [
     {
       name: "Menu anterior",
-      value: 5,
+      value: 0,
     },
     {
       name: "Mostrar Carreras",
@@ -30,6 +30,18 @@ export default class CarreraController {
     this.opcion = opcion;
   }
 
+  async await() {
+    const setup = await inquirer.prompt([
+      {
+        type: "input",
+        name: "awaitTime",
+        message: `Teclee una tecla para continuar...`,
+      },
+    ]);
+
+    console.log(chalk.bgGray.black(setup.awaitTime));
+  }
+
   async menu() {
     console.clear();
     console.log(chalk.bgCyan.white("**** Menú de Carreras ****"));
@@ -42,15 +54,15 @@ export default class CarreraController {
       },
     ]);
 
-    console.log(chalk.bgGray.black("Opción seleccionada: " + setup.optCarrera));
-    return setup.opcion;
+    console.log(chalk.bgGray.black("Opción seleccionada Carrera: " + setup.optCarrera));
+    return setup.optCarrera;
   }
 
-  validarMenu(opcion) {
+  async validarMenu(opcion) {
     if (opcion == 0) {
       return;
     } else if (opcion == 1) {
-      this.read();
+      await this.read();
     } else if (opcion == 2) {
       this.create();
     } else if (opcion == 3) {
@@ -65,8 +77,10 @@ export default class CarreraController {
   create() {
     console.log(chalk.bgGreen.white("Creando carrera..."));
   }
-  read() {
+  async read() {
     console.log(chalk.bgBlue.white("Mostrando carreras..."));
+    await this.await();
+    await this.init();
   }
   update() {
     console.log(chalk.bgYellow.white("Actualizando carrera..."));
@@ -76,6 +90,8 @@ export default class CarreraController {
   }
 
   async init() {
+    console.clear();
     const opcion = await this.menu();
+    await this.validarMenu(opcion);
   }
 }
