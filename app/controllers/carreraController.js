@@ -1,6 +1,8 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
 
+import Carrera from "../models/carrera.js";
+
 export default class CarreraController {
   opcion = 0;
   opciones = [
@@ -28,6 +30,7 @@ export default class CarreraController {
 
   constructor(opcion) {
     this.opcion = opcion;
+    this.carrera = new Carrera();
   }
 
   async await() {
@@ -54,7 +57,6 @@ export default class CarreraController {
       },
     ]);
 
-    console.log(chalk.bgGray.black("Opción seleccionada Carrera: " + setup.optCarrera));
     return setup.optCarrera;
   }
 
@@ -74,13 +76,44 @@ export default class CarreraController {
     }
   }
 
-  create() {
+  async create() {
+    console.clear();
     console.log(chalk.bgGreen.white("Creando carrera..."));
+
+    let payload = await inquirer.prompt([
+      {
+        type: "input",
+        name: "nombre",
+        message: `Ingrese el nombre de la carrera:`,
+      },
+    ]);
+
+    // Buascar que la carrera no exista;
+    const existe = await this.validateCarrera(payload.nombre);
+    if (existe) {
+      console.log(chalk.bgRed.white("No se puede crear la carrera, ya existe"));
+      return;
+    }
+
+    this.carrera.save({
+      table: this.carrera.getTable(),
+      id: Date.now(),
+      nombre: payload.nombre,
+    });
+
+    console.log();
+    console.log(chalk.bgGreen.white("Carrera creada exitosamente"));
+
+    await this.await();
   }
+
   async read() {
     console.log(chalk.bgBlue.white("Mostrando carreras..."));
+    console.log();
+    const carreras = await this.carrera.load();
+    console.table(carreras);
+    console.log();
     await this.await();
-    await this.init();
   }
   update() {
     console.log(chalk.bgYellow.white("Actualizando carrera..."));
@@ -89,9 +122,28 @@ export default class CarreraController {
     console.log(chalk.bgRed.white("Eliminando carrera..."));
   }
 
+  //Metodo para validar que no exista la carrera
+  async validateCarrera(nombre) {
+    const carrera = await this.buscarCarrera(nombre);
+    if (carrera) {
+      return true;
+    }
+    return false;
+  }
+
+  async buscarCarrera(nombre) {
+    const carreras = await this.carrera.load();
+    //console.log(carreras);
+    const carrera = carreras.find((carrera) => carrera.nombre === nombre);
+    return carrera;
+  }
+
   async init() {
-    console.clear();
-    const opcion = await this.menu();
-    await this.validarMenu(opcion);
+    let opcion;
+    do {
+      console.clear();
+      opcion = await this.menu();
+      await this.validarMenu(opcion);
+    } while (opcion != 0);
   }
 }

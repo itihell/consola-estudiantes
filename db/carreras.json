@@ -14,7 +14,9 @@
     "id": 1780092843564,
     "nombre": "Administracion de Empresas"
   },
-  null,
-  null,
-  null
+  {
+    "table": "carreras",
+    "id": 1781303532880,
+    "nombre": "Farmacia"
+  }
 ]

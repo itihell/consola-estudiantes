@@ -48,10 +48,9 @@ async function MainMenu(opcion) {
 }
 
 //(async function () {
-const opcion = await init();
-{
+let opcion;
+do {
+  opcion = await init();
   await MainMenu(opcion);
-  
-}
-while (opcion !== "3");
+} while (opcion !== "3");
 //})();
