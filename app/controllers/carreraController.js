@@ -66,7 +66,7 @@ export default class CarreraController {
     } else if (opcion == 1) {
       await this.read();
     } else if (opcion == 2) {
-      this.create();
+      await this.create();
     } else if (opcion == 3) {
       this.update();
     } else if (opcion == 4) {
@@ -85,6 +85,12 @@ export default class CarreraController {
         type: "input",
         name: "nombre",
         message: `Ingrese el nombre de la carrera:`,
+        validate: (input) => {
+          if (input.trim() === "") {
+            return "El nombre de la carrera no puede estar vacío.";
+          }
+          return true;
+        },
       },
     ]);
 
@@ -92,10 +98,12 @@ export default class CarreraController {
     const existe = await this.validateCarrera(payload.nombre);
     if (existe) {
       console.log(chalk.bgRed.white("No se puede crear la carrera, ya existe"));
+      console.log();
+      await this.await();
       return;
     }
 
-    this.carrera.save({
+    await this.carrera.save({
       table: this.carrera.getTable(),
       id: Date.now(),
       nombre: payload.nombre,
@@ -133,8 +141,10 @@ export default class CarreraController {
 
   async buscarCarrera(nombre) {
     const carreras = await this.carrera.load();
-    //console.log(carreras);
-    const carrera = carreras.find((carrera) => carrera.nombre === nombre);
+    const carrera = carreras.find(
+      (carrera) =>
+        carrera.nombre.toLowerCase().trim() === nombre.toLowerCase().trim(),
+    );
     return carrera;
   }
 
