@@ -50,6 +50,7 @@ async function MainMenu(opcion) {
 //(async function () {
 let opcion;
 do {
+  console.clear();
   opcion = await init();
   await MainMenu(opcion);
 } while (opcion !== "3");

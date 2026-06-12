@@ -18,5 +18,20 @@
     "table": "carreras",
     "id": 1781303532880,
     "nombre": "Farmacia"
+  },
+  {
+    "table": "carreras",
+    "id": 1781305902894,
+    "nombre": "Ingenieria en Computación"
+  },
+  {
+    "table": "carreras",
+    "id": 1781305926270,
+    "nombre": "Ingenieria en Computación "
+  },
+  {
+    "table": "carreras",
+    "id": 1781306084072,
+    "nombre": "Medicina Veterinaria"
   }
 ]
