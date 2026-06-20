@@ -2,6 +2,7 @@ import inquirer from "inquirer";
 import chalk from "chalk";
 
 import carreraController from "./app/controllers/carreraController.js";
+import estudianteController from "./app/controllers/estudianteController.js";
 
 async function init() {
   const setup = await inquirer.prompt([
@@ -35,7 +36,8 @@ async function MainMenu(opcion) {
     const carrera = new carreraController(opcion);
     await carrera.init();
   } else if (opcion === "2") {
-    // Estudiantes
+    const estudiante = new estudianteController(opcion);
+    await estudiante.init();
   } else if (opcion === "3") {
     // Lógica para salir
   } else {
