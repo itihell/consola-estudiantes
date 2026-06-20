@@ -6,16 +6,6 @@
   },
   {
     "table": "carreras",
-    "id": 1780092842213,
-    "nombre": "Administracion de Empresas"
-  },
-  {
-    "table": "carreras",
-    "id": 1780092843564,
-    "nombre": "Administracion de Empresas"
-  },
-  {
-    "table": "carreras",
     "id": 1781303532880,
     "nombre": "Farmacia"
   },
@@ -26,12 +16,12 @@
   },
   {
     "table": "carreras",
-    "id": 1781305926270,
-    "nombre": "Ingenieria en Computación "
+    "id": 1781306084072,
+    "nombre": "Medicina Veterinaria"
   },
   {
     "table": "carreras",
-    "id": 1781306084072,
-    "nombre": "Medicina Veterinaria"
+    "id": 1781903989002,
+    "nombre": "Liceniciatura en Español"
   }
 ]
